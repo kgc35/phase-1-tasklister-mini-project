@@ -2,27 +2,39 @@ document.addEventListener("DOMContentLoaded", () => {
   // your code here
 
   let taskForm = document.querySelector("#create-task-form");
-  let taskUl = document.querySelector("#tasks");
-  // console.log(taskForm)
-  taskForm.addEventListener("submit", function(e) {
-    e.preventDefault()
-   
+  let taskUl = document.querySelector("ul#tasks");
 
-    let form = e.target  
+  // console.log(taskForm)
+  taskForm.addEventListener("submit", function (e) {
+    e.preventDefault()
+
+    let form = e.target
     let inputBox = form["new-task-description"]
     let whatUserTyped = inputBox.value
-    // console.log(whatUserTyped)
+
 
     //DOM Manipulation
     let blankLi = document.createElement("li")
+    let spanInsideLi = document.createElement("span")
 
-    blankLi.innerText = whatUserTyped;
-    blankLi.className = "inputtext";
-    blankLi.innerHTML = "<button> Delete</button>"
+
+    spanInsideLi.innerText = whatUserTyped;
+
+
 
     taskUl.append(blankLi);
+    blankLi.append(spanInsideLi)
+
+    let delButton = document.createElement("button");
+    delButton.innerText = "delete";
+    // delButton.append(document.createTextNode("delete"));
+    blankLi.append(delButton);
 
 
+    delButton.addEventListener("click", function () {
+      delButton.parentNode.remove();
+    })
 
+    e.target.reset();
   })
 });
